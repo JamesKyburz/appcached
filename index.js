@@ -39,7 +39,7 @@ function appcached (resources, opts, cb) {
   }
   if (!opts.cache) opts.cache = []
   cb = once(cb)
-  var touching = webtouch(resources, function (e, urls) {
+  var touching = webtouch(resources, {headers: opts.headers}, function (e, urls) {
     if (e) return cb(e)
     if (!opts.md5) opts.md5 = hash(_.values(etags).sort().join(''))
     opts.cache = opts.cache.concat(_.keys(etags)).sort();
